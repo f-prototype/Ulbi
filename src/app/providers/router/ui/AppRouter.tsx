@@ -3,16 +3,23 @@ import { Route, Routes } from 'react-router-dom';
 import { AboutPage } from 'pages/AboutPage';
 import { MainPage } from 'pages/MainPage';
 import { routeConfig } from 'shared/config/routeConfig/routeConfig';
+import i18next from 'i18next';
 
 const AppRouter = () => (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={(
+        <div>
+            {' '}
+            {i18next.t('Loading...')}
+        </div>
+    )}
+    >
         <Routes>
             {Object.values(routeConfig).map(({ element, path }) => (
                 <Route
                     key={path}
                     path={path}
                     element={(
-                        <Suspense fallback={<div>Loading...</div>}>
+                        <Suspense fallback={<div>{i18next.t('Loading...')}</div>}>
                             <div className="page-wrapper">
                                 {element}
                             </div>
