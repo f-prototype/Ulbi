@@ -4,31 +4,26 @@ import { AboutPage } from 'pages/AboutPage';
 import { MainPage } from 'pages/MainPage';
 import { routeConfig } from 'shared/config/routeConfig/routeConfig';
 import i18next from 'i18next';
+import { PageLoader } from 'widgets/PageLoder/ui/PageLoader';
 
 const AppRouter = () => (
-    <Suspense fallback={(
-        <div>
-            {' '}
-            {i18next.t('Loading...')}
-        </div>
-    )}
-    >
-        <Routes>
-            {Object.values(routeConfig).map(({ element, path }) => (
-                <Route
-                    key={path}
-                    path={path}
-                    element={(
-                        <Suspense fallback={<div>{i18next.t('Loading...')}</div>}>
-                            <div className="page-wrapper">
-                                {element}
-                            </div>
-                        </Suspense>
-                    )}
-                />
-            ))}
-        </Routes>
-    </Suspense>
+
+    <Routes>
+        {Object.values(routeConfig).map(({ element, path }) => (
+            <Route
+                key={path}
+                path={path}
+                element={(
+                    <Suspense fallback={<PageLoader />}>
+                        <div className="page-wrapper">
+                            {element}
+                        </div>
+                    </Suspense>
+                )}
+            />
+        ))}
+    </Routes>
+
 );
 
 export default AppRouter;
