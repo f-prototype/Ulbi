@@ -1,5 +1,5 @@
+import React, { useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { useState } from 'react';
 import { ThemeSwitcher } from 'shared/ui/ThemeSwitcher';
 import { LangSwitcher } from 'shared/ui/LangSwitcher/LangSwitcher';
 import i18next from 'i18next';
@@ -17,11 +17,12 @@ export const Sidebar = ({ className }: SidebarProps) => {
     };
     return (
         <div
+            data-testid="sidebar"
             className={classNames(cls.Sidebar, { [cls.collapsed]: collapsed }, [
                 className,
             ])}
         >
-            <button type="button" onClick={onToggle}>
+            <button type="button" onClick={onToggle} data-testid="sidebar-toggle">
                 {i18next.t('toggle')}
             </button>
             <div className={cls.switchers}>
